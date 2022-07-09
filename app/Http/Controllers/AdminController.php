@@ -8,6 +8,9 @@ use App\Models\Therapist;
 
 use App\Models\Appointment;
 
+use Notification;
+
+use App\Notifications\SendEmailNotification;
 
 
 class AdminController extends Controller
@@ -143,7 +146,26 @@ class AdminController extends Controller
         {
 
             $data=appointment::find($id);
-            return view('admin.email_view',compact('data'));
+            return view('admin.email_view',compact('data')
+        );
+        }
+
+        public function sendemail(Request $request,$id)
+        {
+            $data = appointment::find($id);
+            $details = 
+            [
+                'greet' => $request->Greet,
+                'body' => $request->Body,
+                'actiontext' => $request->ActionText,
+                'actionurl' => $request->ActionText,
+                'end' => $request->End 
+            ];
+
+            Notification::send($data,new SendEmailNotification($details));
+      
+      
+            return redirect()->back();
         }
 
 }

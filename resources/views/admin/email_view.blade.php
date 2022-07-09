@@ -69,7 +69,7 @@
           @endif
   
 
-          <form action="{{url('upload_therapist')}}" method="POST" enctype="multipart/form-data">
+          <form action="{{url('sendemail',$data->id )}}" method="POST" enctype="multipart/form-data">
 
             @csrf
 
