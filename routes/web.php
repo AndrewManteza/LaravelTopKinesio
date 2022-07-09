@@ -59,4 +59,6 @@ Route::get('/emailview/{id}',[AdminController::class,'emailview']);
 
 Route::post('/sendemail/{id}',[AdminController::class,'sendemail']);
 
+Route::get('/contact',[HomeController::class,'contact']);
+
 
