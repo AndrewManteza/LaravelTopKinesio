@@ -12,12 +12,36 @@ use Notification;
 
 use App\Notifications\SendEmailNotification;
 
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
     public function addview()
     {
-        return view('admin.add_therapist');
+
+        if(Auth::id())
+
+        {
+            
+            if(Auth::user()->usertype==1)
+            {
+            return view('admin.add_therapist');
+            }
+            else
+        
+            {
+            return redirect()->back();
+            }
+        }
+
+        
+        else
+        {
+            return redirect('login');
+        }
+        
+
+        
     }
 
     public function upload(Request $request)
@@ -46,11 +70,28 @@ class AdminController extends Controller
 
     public function showappointment()
     {
+        if(Auth::id())
 
-        $data=appointment::all();
+        {
+            
+            if(Auth::user()->usertype==1)
+            {
 
-
-        return view('admin.showappointment', compact('data'));
+            $data=appointment::all();
+            return view('admin.showappointment', compact('data'));
+            
+            }
+            else
+            {
+            return redirect()->back();
+            }
+        }
+        
+        else
+        {
+            return redirect('login');
+        }
+   
     }
 
     public function approved($id)
