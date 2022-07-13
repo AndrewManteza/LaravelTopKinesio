@@ -74,10 +74,7 @@
               <a class="nav-link" href="about.html">About Us</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="doctors.html">Doctors</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="blog.html">News</a>
+              <a class="nav-link" href="{{url ('chatify')}}">Chat</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{url ('contact')}}">Contact</a>

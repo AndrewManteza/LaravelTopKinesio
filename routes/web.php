@@ -61,4 +61,6 @@ Route::post('/sendemail/{id}',[AdminController::class,'sendemail']);
 
 Route::get('/contact',[HomeController::class,'contact']);
 
+Route::get('../config/chatify',[HomeController::class,'']);
+
 
