@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Therapist;
 
+use App\Models\User;
+
 use App\Models\Appointment;
 
 use Notification;
@@ -43,6 +45,58 @@ class AdminController extends Controller
 
         
     }
+
+    public function addviewpatient()
+    {
+
+        if(Auth::id())
+
+        {
+            
+            if(Auth::user()->usertype==1)
+            {
+            return view('admin.add_patient');
+            }
+            else
+        
+            {
+            return redirect()->back();
+            }
+        }
+
+        
+        else
+        {
+            return redirect('login');
+        }
+        
+
+        
+    }
+    public function uploadPatient(Request $request)
+    {
+        $user =new user;
+
+       
+        
+        $image=$request->file;
+
+        $imagename=time().'.'.$image->getClientoriginalExtension();
+        
+        $request->file->move('userpic',$imagename);
+        $user->image=$imagename;
+        $user ->name=$request->name;
+        $user ->phone=$request->phone; 
+        $user ->address=$request->address;
+        $user ->email=$request->email;
+    
+        $user->save();
+
+        return redirect()->back()->with('message', 'PatientAdded Added Successfully');
+
+    }
+
+
 
     public function upload(Request $request)
     {
@@ -132,6 +186,8 @@ class AdminController extends Controller
         return view('admin.showtherapist',compact('data'));
     }
 
+  
+
     public function deletetherapist($id)
     {
         $data=therapist::find($id);
@@ -149,6 +205,31 @@ class AdminController extends Controller
             return view('admin.updatetherapist',compact('data'));
         }
     
+        public function viewpatient()
+        {
+    
+            $data = user::all();
+    
+            return view('admin.view_patients',compact('data'));
+        }
+
+
+        public function deletepatient($id)
+        {
+            $data=user::find($id);
+    
+            $data->delete();
+    
+            return redirect()->back();
+        }
+    
+    
+        public function updatepatient($id)
+            {
+    
+                $data = user::find($id);
+                return view('admin.updatepatient',compact('data'));
+            }
 
     public function edittherapist(Request $request, $id)
         {
