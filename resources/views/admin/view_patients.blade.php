@@ -41,24 +41,28 @@
                 <th style="padding:10px">Email</th>
                 <th style="padding:10px">Phone</th>
                 <th style="padding:10px">Address</th>
+                <th style="padding:10px">Description</th>
+                <th style="padding:10px">File</th>
                 <th style="padding:10px">Patient Picture</th>
 
                 <th style="padding:10px">Update</th>
                 <th style="padding:10px">Delete</th>
                 </tr>
 
-            @foreach($data as $user)
+            @foreach($data as $patient)
             <tr align="center" style = "background-color:black;">
-                <td>{{$user->name}}</td>
-                <td>{{$user->email}}</td>
-                <td>{{$user->phone}}</td>
-                <td>{{$user->address}}</td>
-                <td><img height="100" width="100"src="userpic/{{$user->image}}"></td>
+                <td>{{$patient->name}}</td>
+                <td>{{$patient->email}}</td>
+                <td>{{$patient->phone}}</td>
+                <td>{{$patient->address}}</td>
+                <td>{{$patient->description}}</td>
+                <td>{{$patient->file}}</td>
+                <td><img height="100" width="100"src="patientpic/{{$patient->image}}"></td>
                 <td>
-                    <a onclick="return confirm('Confirm deletion?')"class= "btn btn-danger" href="{{url('deletepatient',$user->id )}}">Delete</a>
+                    <a onclick="return confirm('Confirm deletion?')"class= "btn btn-danger" href="{{url('deletepatient',$patient->id )}}">Delete</a>
                    </td>
                 <td>
-                   <a class= "btn btn-primary" href="{{url('updatepatient', $user->id)}}">Update</a>
+                   <a class= "btn btn-primary" href="{{url('updatepatient', $patient->id)}}">Update</a>
                    </td>
             </tr>
             @endforeach

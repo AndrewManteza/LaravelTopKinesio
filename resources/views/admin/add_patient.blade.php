@@ -99,16 +99,32 @@
 
             </div>
 
+
+            <div style="padding:15px">
+
+                <label>Patient Description</label>
+                <input type="text" style="color:black" name="description" placeholder="Description" required="">
+  
+            </div>
+
+            <div style="padding:15px">
+
+                <label>Patient File</label>
+                <input type="file" name="file" required="">
+  
+            </div>
+            
+  
             <div style="padding:15px">
 
               <label>Patient Image</label>
-              <input type="file" name="file" required="">
+              <input type="file" name="image" required="">
 
             </div>
 
             <div style="padding:15px">
 
-              <label>Therapist Image</label>
+              <label>Submit</label>
               <input type="submit" class="btn btn-success">
 
             </div>

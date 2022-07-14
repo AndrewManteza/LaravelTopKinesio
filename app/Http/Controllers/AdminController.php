@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Therapist;
 
-use App\Models\User;
+use App\Models\Patient;
 
 use App\Models\Appointment;
 
@@ -75,22 +75,25 @@ class AdminController extends Controller
     }
     public function uploadPatient(Request $request)
     {
-        $user =new user;
+        $patient =new patient;
 
-       
-        
-        $image=$request->file;
-
+        $image=$request->image;
         $imagename=time().'.'.$image->getClientoriginalExtension();
+        $request->image->move('patientpic',$imagename);
         
-        $request->file->move('userpic',$imagename);
-        $user->image=$imagename;
-        $user ->name=$request->name;
-        $user ->phone=$request->phone; 
-        $user ->address=$request->address;
-        $user ->email=$request->email;
+        $file=$request->file;
+        $filename=time().'.'.$file->getClientoriginalExtension();
+        $request->file->move('patientfiles',$filename);
+        
+        $patient->image=$imagename;
+        $patient->file=$filename;
+        $patient ->name=$request->name;
+        $patient ->phone=$request->phone; 
+        $patient ->address=$request->address;
+        $patient ->email=$request->email;
+        $patient ->description=$request->description;
     
-        $user->save();
+        $patient->save();
 
         return redirect()->back()->with('message', 'PatientAdded Added Successfully');
 
@@ -110,7 +113,6 @@ class AdminController extends Controller
         
         $request->file->move('therapistpic',$imagename);
         $therapist->image=$imagename;
-
         $therapist ->name=$request->name;
         $therapist ->phone=$request->phone; 
         $therapist ->address=$request->address;
@@ -208,7 +210,7 @@ class AdminController extends Controller
         public function viewpatient()
         {
     
-            $data = user::all();
+            $data = patient::all();
     
             return view('admin.view_patients',compact('data'));
         }
