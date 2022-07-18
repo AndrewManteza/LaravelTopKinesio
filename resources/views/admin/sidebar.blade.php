@@ -67,6 +67,15 @@
       </li>
 
       <li class="nav-item menu-items">
+        <a class="nav-link" href="{{url('add_patient_view')}}">
+          <span class="menu-icon">
+            <i class="mdi mdi-file-document-box"></i>
+          </span>
+          <span class="menu-title">Add Patient</span>
+        </a>
+      </li>
+
+      <li class="nav-item menu-items">
       <a class="nav-link" href="{{url('showappointment')}}">
         <span class="menu-icon">
           <i class="mdi mdi-file-document-box"></i>
@@ -84,6 +93,16 @@
         <span class="menu-title">All Therapists</span>
       </a>
     </li>
+
+    <li class="nav-item menu-items">
+      <a class="nav-link" href="{{url('viewpatient')}}">
+        <span class="menu-icon">
+          <i class="mdi mdi-file-document-box"></i>
+        </span>
+        <span class="menu-title">View Patients</span>
+      </a>
+    </li>
+
 
     </ul>
   </nav>

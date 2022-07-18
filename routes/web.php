@@ -31,9 +31,16 @@ Route::middleware([
 });
 
 
+
+Route::get('/viewpatient',[AdminController::class,'viewpatient']);
+
 Route::get('/add_therapist_view',[AdminController::class,'addview']);
 
+Route::get('/add_patient_view',[AdminController::class,'addviewpatient']);
+
 Route::post('/upload_therapist',[AdminController::class,'upload']);
+
+Route::post('/upload_patient',[AdminController::class,'uploadPatient']);
 
 Route::post('/appointment',[HomeController::class,'appointment']);
 
@@ -53,12 +60,20 @@ Route::get('/deletetherapist/{id}',[AdminController::class,'deletetherapist']);
 
 Route::get('/updatetherapist/{id}',[AdminController::class,'updatetherapist']);
 
-Route::post('/edittherapist/{id}',[AdminController::class,'edittherapist']);
+Route::post('/editpatient/{id}',[AdminController::class,'editpatient']);
+
+Route::get('/deletepatient/{id}',[AdminController::class,'deletepatient']);
+
+Route::get('/updatepatient/{id}',[AdminController::class,'updatepatient']);
+
+Route::post('/editpatient/{id}',[AdminController::class,'editpatient']);
 
 Route::get('/emailview/{id}',[AdminController::class,'emailview']);
 
 Route::post('/sendemail/{id}',[AdminController::class,'sendemail']);
 
 Route::get('/contact',[HomeController::class,'contact']);
+
+Route::get('../config/chatify',[HomeController::class,'']);
 
 

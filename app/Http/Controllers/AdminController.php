@@ -6,19 +6,100 @@ use Illuminate\Http\Request;
 
 use App\Models\Therapist;
 
+use App\Models\Patient;
+
 use App\Models\Appointment;
 
 use Notification;
 
 use App\Notifications\SendEmailNotification;
 
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
     public function addview()
     {
-        return view('admin.add_therapist');
+
+        if(Auth::id())
+
+        {
+            
+            if(Auth::user()->usertype==1)
+            {
+            return view('admin.add_therapist');
+            }
+            else
+        
+            {
+            return redirect()->back();
+            }
+        }
+
+        
+        else
+        {
+            return redirect('login');
+        }
+        
+
+        
     }
+
+    public function addviewpatient()
+    {
+
+        if(Auth::id())
+
+        {
+            
+            if(Auth::user()->usertype==1)
+            {
+            return view('admin.add_patient');
+            }
+            else
+        
+            {
+            return redirect()->back();
+            }
+        }
+
+        
+        else
+        {
+            return redirect('login');
+        }
+        
+
+        
+    }
+    public function uploadPatient(Request $request)
+    {
+        $patient =new patient;
+
+        $image=$request->image;
+        $imagename=time().'.'.$image->getClientoriginalExtension();
+        $request->image->move('patientpic',$imagename);
+        
+        $file=$request->file;
+        $filename=time().'.'.$file->getClientoriginalExtension();
+        $request->file->move('patientfiles',$filename);
+        
+        $patient->image=$imagename;
+        $patient->file=$filename;
+        $patient ->name=$request->name;
+        $patient ->phone=$request->phone; 
+        $patient ->address=$request->address;
+        $patient ->email=$request->email;
+        $patient ->description=$request->description;
+    
+        $patient->save();
+
+        return redirect()->back()->with('message', 'PatientAdded Added Successfully');
+
+    }
+
+
 
     public function upload(Request $request)
     {
@@ -32,7 +113,6 @@ class AdminController extends Controller
         
         $request->file->move('therapistpic',$imagename);
         $therapist->image=$imagename;
-
         $therapist ->name=$request->name;
         $therapist ->phone=$request->phone; 
         $therapist ->address=$request->address;
@@ -46,11 +126,28 @@ class AdminController extends Controller
 
     public function showappointment()
     {
+        if(Auth::id())
 
-        $data=appointment::all();
+        {
+            
+            if(Auth::user()->usertype==1)
+            {
 
-
-        return view('admin.showappointment', compact('data'));
+            $data=appointment::all();
+            return view('admin.showappointment', compact('data'));
+            
+            }
+            else
+            {
+            return redirect()->back();
+            }
+        }
+        
+        else
+        {
+            return redirect('login');
+        }
+   
     }
 
     public function approved($id)
@@ -91,6 +188,8 @@ class AdminController extends Controller
         return view('admin.showtherapist',compact('data'));
     }
 
+  
+
     public function deletetherapist($id)
     {
         $data=therapist::find($id);
@@ -108,6 +207,31 @@ class AdminController extends Controller
             return view('admin.updatetherapist',compact('data'));
         }
     
+        public function viewpatient()
+        {
+    
+            $data = patient::all();
+    
+            return view('admin.view_patients',compact('data'));
+        }
+
+
+        public function deletepatient($id)
+        {
+            $data=user::find($id);
+    
+            $data->delete();
+    
+            return redirect()->back();
+        }
+    
+    
+        public function updatepatient($id)
+            {
+    
+                $data = user::find($id);
+                return view('admin.updatepatient',compact('data'));
+            }
 
     public function edittherapist(Request $request, $id)
         {
