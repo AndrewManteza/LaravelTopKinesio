@@ -69,7 +69,7 @@
 
           <form action="{{url('upload_patient')}}"
            method="POST"
-          enctype="multipart/form-data">
+          enctype="multipart/form-data" id="uploadform">
 
             @csrf
 
@@ -101,11 +101,16 @@
 
             </div>
 
+            <label>Patient Description</label>
 
             <div style="padding:15px">
 
-                <label>Patient Description</label>
-                <input type="text" style="color:black" name="description" placeholder="Description" required="">
+                
+                
+                <textarea style="color:black" rows="4" cols="43" form="uploadform" name="description" placeholder="Description" required="">
+    
+                </textarea>
+                
   
             </div>
 
@@ -126,7 +131,6 @@
 
             <div style="padding:15px">
 
-              <label>Submit</label>
               <input type="submit" class="btn btn-success">
 
             </div>

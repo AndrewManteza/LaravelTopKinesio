@@ -241,6 +241,8 @@ class AdminController extends Controller
             $patient->email=$request->email;
     
             $patient->address=$request->address;
+
+            $patient->description=$request->description;
     
             $image=$request->image;
 

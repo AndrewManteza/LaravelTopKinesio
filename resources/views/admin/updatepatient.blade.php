@@ -68,9 +68,23 @@
     
       <form action = "{{url('editpatient', $data->id)}}"
          method= "POST" 
-         enctype="multipart/form-data">
+         enctype="multipart/form-data" id="editform">
 
         @csrf
+
+        <div style="padding:15px;">
+
+          <label>Image</label>
+          <img height= "150" width="150" src="patientpic/{{$data->image}}">
+      
+        </div>
+
+
+        <div style="padding:15px;">
+          <label>Change Image</label>
+          <input type = "file" name="image">
+
+        </div>
       
         <div style="padding:15px;">
             <label>Patient Name</label>
@@ -96,34 +110,20 @@
           name="address" value={{$data->address}}>
         </div>
 
+        
+        <label>Patient Description</label>
+
         <div style="padding:15px">
 
-          <label>Patient Description</label>
-          <input type="text" style="color:black" 
-          name="description" value={{$data->description}}>
-
-        </div>
-      
-        <div style="padding:15px;">
-
-            <label>Image</label>
-            <img height= "150" width="150" src="patientpic/{{$data->image}}">
-        
+            <textarea style="color:black" rows="4" cols="43" form="editform" name="description">
+              {{$data->description}}
+            </textarea>
+            
         </div>
 
+  
 
-        <div style="padding:15px;">
-            <label>Change Image</label>
-            <input type = "file" name="image">
 
-        </div>
-
-        <div style="padding:15px;">
-
-          <label>Files</label>
-          <input type="file" name="file" value ={{$data->file}}>
-      
-         </div>
 
       
       <div style="padding:15px;">
@@ -142,6 +142,21 @@
     
     
     </form>
+
+    
+    <div style="padding:15px;">
+
+      <table>
+        <tr style="background-color:black;">
+        <th style="padding:10px">Files</th>
+        </tr>
+      
+        
+
+    
+      <input type="file" name="file" value ={{$data->file}}>
+  
+     </div>
       
         </div>
 
