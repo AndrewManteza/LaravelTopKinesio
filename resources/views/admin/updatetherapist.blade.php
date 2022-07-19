@@ -63,7 +63,8 @@
 
         </div>
  
-
+        @endif
+  
 
 
     
@@ -112,7 +113,8 @@
         </div>
 
         <div style="padding:15px;">
-
+            
+          <label>Submit</label>
             <input type="submit" class="btn btn-primary">
         </div>
 
@@ -120,14 +122,12 @@
     
     </form>
       
-        </div>
+  
 
-
-        <div align = "center" style="padding-top:100px;">
-
+      
           
 
-        </div>
+      </div>
       </div>
 
         <!-- partial -->

@@ -67,7 +67,9 @@
           @endif
   
 
-          <form action="{{url('upload_patient')}}" method="POST" enctype="multipart/form-data">
+          <form action="{{url('upload_patient')}}"
+           method="POST"
+          enctype="multipart/form-data">
 
             @csrf
 

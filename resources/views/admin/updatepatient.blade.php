@@ -63,11 +63,10 @@
 
         </div>
  
-
-
-
+        @endif
+  
     
-      <form action = "{{url('editpatientt', $data->id)}}"
+      <form action = "{{url('editpatient', $data->id)}}"
          method= "POST" 
          enctype="multipart/form-data">
 
@@ -96,25 +95,49 @@
           <input style="color:black;" type="text"
           name="address" value={{$data->address}}>
         </div>
+
+        <div style="padding:15px">
+
+          <label>Patient Description</label>
+          <input type="text" style="color:black" 
+          name="description" value={{$data->description}}>
+
+        </div>
       
         <div style="padding:15px;">
 
             <label>Image</label>
-            <img height= "150" width="150" src="Patientpic/{{$data->image}}">
+            <img height= "150" width="150" src="patientpic/{{$data->image}}">
         
         </div>
 
 
         <div style="padding:15px;">
             <label>Change Image</label>
-            <input type = "file" name="file">
+            <input type = "file" name="image">
 
         </div>
 
         <div style="padding:15px;">
 
-            <input type="submit" class="btn btn-primary">
-        </div>
+          <label>Files</label>
+          <input type="file" name="file" value ={{$data->file}}>
+      
+         </div>
+
+      
+      <div style="padding:15px;">
+        
+        <label>Change File</label>
+        <input type = "file" name="file">
+
+      </div>
+
+      <div style="padding:15px;">
+
+        <input type="submit" class="btn btn-primary">
+      
+      </div>
 
     
     
@@ -128,7 +151,9 @@
           
 
         </div>
+
       </div>
+    
 
         <!-- partial -->
       

@@ -105,8 +105,6 @@ class AdminController extends Controller
     {
         $therapist =new therapist;
 
-       
-        
         $image=$request->file;
 
         $imagename=time().'.'.$image->getClientoriginalExtension();
@@ -193,47 +191,94 @@ class AdminController extends Controller
     public function deletetherapist($id)
     {
         $data=therapist::find($id);
-
         $data->delete();
-
         return redirect()->back();
     }
 
 
+
     public function updatetherapist($id)
-        {
+    {
+        $data = therapist::find($id);
+        return view('admin.updatetherapist',compact('data'));
+    }
+    
 
-            $data = therapist::find($id);
-            return view('admin.updatetherapist',compact('data'));
+
+    public function viewpatient()
+    {
+    
+        $data = patient::all();
+        return view('admin.view_patients',compact('data'));
+    }
+
+
+    public function deletepatient($id)
+    {
+        $data=patient::find($id);
+        $data->delete();
+        return redirect()->back();
+    }
+    
+     
+    public function updatepatient($id)
+    {
+    
+        $data = patient::find($id);
+        return view('admin.updatepatient',compact('data'));
+    }
+
+
+    public function editpatient(Request $request, $id)
+           
+        {
+            $patient = patient::find($id);
+    
+            $patient->name=$request->name;
+    
+            $patient->phone=$request->phone;
+    
+            $patient->email=$request->email;
+    
+            $patient->address=$request->address;
+    
+            $image=$request->image;
+
+            $file=$request->file;
+    
+                if($image)
+                    {
+    
+                        $imagename=time().'.'.$image->getClientOriginalExtension(); 
+                        $request->image->move('patientpic', $imagename);
+                        $patient->image=$imagename;
+    
+                    }
+                    
+            
+                
+                if($file)
+                    {
+                    
+                        $filename=time().'.'.$file->getClientoriginalExtension();
+                        $request->file->move('patientfiles',$filename);
+                        $patient->file=$filename;
+                    
+                    }
+        
+     
+            $patient->save();
+    
+            return redirect()->back()->with('message','Patient Details Updated Successfully');
+                 
+    
+         
         }
     
-        public function viewpatient()
-        {
-    
-            $data = patient::all();
-    
-            return view('admin.view_patients',compact('data'));
-        }
 
 
-        public function deletepatient($id)
-        {
-            $data=user::find($id);
-    
-            $data->delete();
-    
-            return redirect()->back();
-        }
-    
-    
-        public function updatepatient($id)
-            {
-    
-                $data = user::find($id);
-                return view('admin.updatepatient',compact('data'));
-            }
 
-    public function edittherapist(Request $request, $id)
+        public function edittherapist(Request $request, $id)
         {
             $therapist = therapist::find($id);
 

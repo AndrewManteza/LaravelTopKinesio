@@ -48,6 +48,7 @@ Route::get('/myappointment',[HomeController::class,'myappointment']);
 
 Route::get('/cancel_appoint/{id}',[HomeController::class,'cancel_appoint']);
 
+
 Route::get('/showappointment',[AdminController::class,'showappointment']);
 
 Route::get('/approved/{id}',[AdminController::class,'approved']);
@@ -66,7 +67,7 @@ Route::get('/deletepatient/{id}',[AdminController::class,'deletepatient']);
 
 Route::get('/updatepatient/{id}',[AdminController::class,'updatepatient']);
 
-Route::post('/editpatient/{id}',[AdminController::class,'editpatient']);
+Route::post('/edittherapist/{id}',[AdminController::class,'edittherapist']);
 
 Route::get('/emailview/{id}',[AdminController::class,'emailview']);
 
